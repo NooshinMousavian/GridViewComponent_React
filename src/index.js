@@ -5,11 +5,20 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import * as serviceWorker from "./serviceWorker";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
-import { Provider } from "react-redux";
 import { createStore } from "redux";
-import rootReducer from "./reducers";
+import { Provider, connect } from "react-redux";
 
-const store = createStore(rootReducer);
+const gridReducer = function (state, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      return state - 1;
+    default:
+      return state;
+  }
+};
+let store = createStore(gridReducer);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
